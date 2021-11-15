@@ -22,16 +22,15 @@ export class LoginComponent {
   ) {}
 
   login() {
-    console.log(this.miFormulario.value);
 
     const { correo, password } = this.miFormulario.value;
 
     this.authService.login(correo, password).subscribe((ok) => {
-      console.log(ok);
+      // console.log(ok);
       if ( ok === true ) {
         this.router.navigateByUrl('/dashboard');
       } else {
-        Swal.fire('Error', ok, 'error')
+        Swal.fire('Error', ok, 'error');
       }
     });
 

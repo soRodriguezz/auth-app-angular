@@ -16,7 +16,7 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 })
 export class DashboardComponent {
 
-  get usuario(){
+  get usuario() {
     return this.authService.usuario;
   }
 

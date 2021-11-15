@@ -8,13 +8,13 @@ export interface AuthResponse {
 export interface Usuario {
     _id:      string;
     nombre:   string;
-    correo:   string;
-    password: string;
+    correo?:   string;
+    password?: string;
     __v?:      number;
 }
 
 export interface Errors {
-    password: Password;
+    password?: Password;
 }
 
 export interface Password {
