@@ -18,6 +18,27 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
+  register( nombre: string, correo: string, password: string ) {
+    return this.http
+      .post<AuthResponse>(`${environment.baseURL}/auth/nuevo-usuario`, { nombre, correo, password,  })
+      .pipe(
+        tap((resp) => {
+          if (resp.ok === true) {
+            localStorage.setItem('token', resp.token!);
+            
+            this._usuario = {
+              _id: resp.usuario!._id,
+              nombre: resp.usuario!.nombre,
+              correo: resp.usuario!.correo,
+              password: resp.usuario!.password,
+            };
+          }
+        }),
+        map((resp) => resp.ok),
+        catchError((err) => of(err.error.msg))
+      );
+  }
+
   login(correo: string, password: string) {
     return this.http
       .post<AuthResponse>(`${environment.baseURL}/auth`, { correo, password })
